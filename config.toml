@@ -1,3 +1,13 @@
-baseURL = "http://example.org/"
-languageCode = "en-us"
-title = "My New Hugo Site"
+baseURL = "https://www.josecarlos.me/"
+languageCode = "es"
+title = "Home | José Carlos"
+theme="josecarlos.me"
+
+[params]
+prod="true"
+helloWorldTitle="Hello, world!"
+iamTitle="I'm José Carlos"
+linkedin="https://www.linkedin.com/in/jose-carlos-garcia-ortega-723902a7/"
+twitter="https://twitter.com/josegarciaor"
+github="https://github.com/JoseCarlosGarcia95"
+email="hola@josecarlos.me"

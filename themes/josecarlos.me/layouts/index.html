@@ -1,0 +1,370 @@
+<!doctype html>
+
+<html lang="{{ .Site.LanguageCode }}">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>{{ .Site.Title }}</title>
+    <meta name="description" content="José Carlos García's personal website">
+    <meta name="author" content="José Carlos (josecarlos.me)"> {{ partial "head_includes.html" . }}
+</head>
+
+<body>
+    {{ partial "navbar.html" }}
+    <div class="hero is-fullheight is-dark is-bold has-background intro">
+        <img class="hero-background is-transparent" src="/img/wallpaper.jpg" />
+        <div class="content">
+            <figure class="image">
+                <img class="is-rounded has-shadow-box" src="/img/me.jpg">
+            </figure>
+
+            <h3 class="subtitle is-uppercase has-shadow has-text-white-ter">{{ .Site.Params.HelloWorldTitle }}</h3>
+            <h1 class="title has-shadow has-text-white-bis">{{ .Site.Params.IamTitle }}</h1>
+            <h3 class="subtitle has-text-right has-shadow has-text-white-ter">Mathematician <strong style="color: darkgray">+</strong> DevSecOps</h3>
+            <div class="is-flex social-connect">
+                <a href="{{ .Site.Params.Linkedin }}" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="{{ .Site.Params.Twitter }}" target="_blank">
+                    <i class="fab fa-twitter"></i>
+
+                </a>
+                <a href="{{ .Site.Params.Github }}" target="_blank">
+                    <i class="fab fa-github"></i>
+
+                </a>
+                <a href="mailto:{{ .Site.Params.Email }}" target="_blank">
+                    <i class="far fa-envelope"></i>
+
+                </a>
+            </div>
+            <div class="next-intro-page">
+
+            </div>
+        </div>
+    </div>
+
+    <section class="hero is-fullheight is-dark is-bold has-background intro" id="aboutme">
+        <img class="hero-background is-transparent lazy" data-src="/img/wallpaper2.jpg" />
+        <div class="content">
+            <h1 class="title">
+                <i>I &nbsp;<i class="fas fa-heart has-text-danger"></i>...</i>
+            </h1>
+            <ul class="is-size-4">
+                <li>
+                    ... math, computer science & computer security.
+                </li>
+                <li>
+                    ... <i>free software.</i>
+                </li>
+                <li>
+                    ... <a href="#4" class="internal-link">contributing</a> to free software projects.
+                </li>
+                <li>
+                    ... Linux.
+                </li>
+                <li>
+                    ... Cryptographic.
+                </li>
+                <li>
+                    ... Cloud computing & high performance computing.
+                </li>
+                <li>
+                    ... tea.
+                </li>
+                <li>
+                    ... doing sports.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="hero is-fullheight is-dark is-bold has-background intro" id="timeline">
+        <img class="hero-background is-transparent lazy" data-src="/img/wallpaper3.jpg" />
+        <div class="content">
+            {{ $timeline := (slice "1995") }}
+
+            <div class="timeline">
+                {{ range first 20 (where .Pages "Section" "timeline") }} {{ if not (in $timeline (.Date.Format "2006") ) }}
+                <header class="timeline-header">
+                    {{ $timeline = $timeline | append (.Date.Format "2006") }}
+
+                    <span class="tag is-primary is-medium">{{.Date.Format "2006"}}</span>
+
+                </header>
+
+                {{ end }}
+                <div class="timeline-item is-primary">
+                    <div class="timeline-marker is-primary"></div>
+                    <div class="timeline-content">
+                        <p class="heading">{{.Date.Format "Jan 2006"}} - {{ if .Params.EndDate }} {{dateFormat "Jan 2006" .Params.EndDate}} {{ else }} now {{ end }}</p>
+                        <p class="is-size-4">{{ .Title }} </p>
+                    </div>
+                </div>
+                {{ end }}
+                <header class="timeline-header">
+                    <span class="tag is-medium is-primary">1995</span>
+                </header>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero is-fullheight is-dark is-bold has-background intro" id="contributions">
+        <img class="hero-background is-transparent lazy" data-src="/img/wallpaper4.jpg" />
+        <div class="content">
+            {{ $projects := (slice "") }}
+
+            <div class="timeline">
+                {{ range first 20 (where (.Pages.ByParam "project") "Section" "contributions") }} {{ if not (in $projects .Params.Project ) }}
+                <header class="timeline-header">
+                    {{ $projects = $projects | append (.Params.Project) }}
+
+                    <span class="tag is-info is-medium is-capitalized">{{.Params.Project}}</span>
+
+                </header>
+
+                {{ end }}
+                <div class="timeline-item is-info">
+                    <div class="timeline-marker is-info"></div>
+                    <div class="timeline-content">
+                        <p class="heading">{{.Params.Category }}</p>
+                        <p class="is-size-4 has-text-white	"><a target="_blank" rel="noopener" href="{{ .Params.Link }}">{{ .Title }}</a></p>
+                    </div>
+                </div>
+                {{ end }}
+                <header class="timeline-header">
+                    <span class="tag is-large is-info">&infin;</span>
+                </header>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero is-fullheight is-dark is-bold has-background intro" id="portfolio">
+        <img class="hero-background is-transparent lazy" data-src="/img/wallpaper5.jpg" />
+
+        <div class="content">
+            <nav class="level is-mobile">
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading"><i class="fab fa-github is-size-2"></i></p>
+                        <p id="github-projects" class="title"></p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading"><i class="fas fa-star is-size-2"></i></p>
+                        <p class="title" id="github-stars"></p>
+                    </div>
+                </div>
+
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading"><i class="fas fa-code-branch is-size-2"></i></p>
+                        <p class="title" id="github-forks"></p>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="tabs is-large is-centered">
+                <ul>
+                    <li id="github-show-projects" class="github-tab is-active"><a>Projects</a></li>
+                    <li id="github-show-stats" class="github-tab"><a>Stats</a></li>
+                </ul>
+            </div>
+
+            <nav class="panel github-tab-container" id="github-show-projects-container">
+                <div class="panel-block">
+                    <p class="control has-icons-left">
+                        <input id="github-search-project" class="input is-small" type="text" placeholder="search">
+                        <span class="icon is-small is-left">
+                      <i class="fas fa-search" aria-hidden="true"></i>
+                    </span>
+                    </p>
+                </div>
+                <div>
+                    <table class="table is-background-transparent is-bordered is-narrow">
+                        <thead>
+                            <tr>
+                                <th class="has-text-white">Project</th>
+                                <th class="has-text-white">Description</th>
+                                <th class="has-text-white">Stars</th>
+                            </tr>
+                        </thead>
+                        <tbody id="github-projects-details">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-block">
+                    <div class="buttons">
+                        <span id="github-previous-page" class="button is-info is-outlined">previous page</span>
+                        <span id="github-next-page" class="button is-success is-outlined">next page</span>
+                    </div>
+                </div>
+
+            </nav>
+
+            <nav class="panel github-tab-container is-hidden" id="github-show-stats-container">
+                <div>
+                    <table class="table is-background-transparent is-bordered is-narrow">
+                        <thead>
+                            <tr>
+                                <th class="has-text-white">Programming Language</th>
+                                <th class="has-text-white">Count</th>
+                            </tr>
+                        </thead>
+                        <tbody id="github-stats-details">
+
+                        </tbody>
+                    </table>
+                </div>
+            </nav>
+        </div>
+
+    </section>
+
+    <!---
+         <section class="hero is-dark has-text-centered">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Blog
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero is-dark is-bold has-background intro">
+        <img class="hero-background is-transparent lazy" data-src="/img/wallpaper.jpg" />
+
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Primary title
+                </h1>
+                <h2 class="subtitle">
+                    Primary subtitle
+                </h2>
+            </div>
+        </div>
+    </section>
+    <section class="hero is-dark is-bold has-background intro">
+        <img class="hero-background is-transparent lazy" data-src="/img/wallpaper2.jpg" />
+
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Primary title
+                </h1>
+                <h2 class="subtitle">
+                    Primary subtitle
+                </h2>
+            </div>
+        </div>
+    </section>
+    <section class="hero is-dark is-bold has-background intro">
+        <img class="hero-background is-transparent lazy" data-src="/img/wallpaper3.jpg" />
+
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Primary title
+                </h1>
+                <h2 class="subtitle">
+                    Primary subtitle
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero is-dark is-bold has-background intro">
+        <img class="hero-background is-transparent lazy" data-src="/img/wallpaper.jpg" />
+
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Primary title
+                </h1>
+                <h2 class="subtitle">
+                    Primary subtitle
+                </h2>
+            </div>
+        </div>
+    </section>
+    -->
+
+    <section class="hero is-fullheight is-dark is-bold has-background intro" id="contact">
+        <img class="hero-background is-transparent lazy" data-src="/img/wallpaper2.jpg" />
+        <div class="content">
+            <h1 class="title">
+                Contact
+            </h1>
+
+            <form action="https://formspree.io/hola@josecarlos.me" method="POST">
+
+                <div class="field">
+                    <label class="label has-text-white">Name</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" placeholder="Your name">
+                    </div>
+                </div>
+
+
+                <div class="field">
+                    <label class="label has-text-white">Email</label>
+                    <div class="control">
+                        <input class="input" type="email" name="_replyto" placeholder="Your email">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label has-text-white">Message</label>
+                    <div class="control">
+                        <textarea class="textarea" placeholder="Textarea"></textarea>
+                    </div>
+                </div>
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <input type="submit" class="button" value="Send">
+                    </div>
+                </div>
+
+            </form>
+    </section>
+
+    <footer class="footer has-background-grey-dark">
+        <div class="content has-text-centered has-text-white">
+            <p>
+                <strong class="has-text-white">josecarlos.me</strong> by <a href="https://josecarlos.me">José Carlos</a>.
+            </p>
+            <p>
+                The source code is licensed under
+                <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3</a>. The website content is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+            </p>
+
+            <p>
+                You can download source code <a href="https://github.com/JoseCarlosGarcia95/josecarlos.me">here</a>.
+            </p>
+            <p>
+                Made with <strong class="has-text-white">Bulma</strong> + <strong class="has-text-white">Hugo</strong> +
+                <i class="fab fa-linux fa-lg"></i> + <i class="fa fa-code fa-lg"></i> + <i class="fab fa-html5 fa-lg"></i> + <i class="fa fa-heart fa-lg"></i> + <i class="fa fa-coffee fa-lg"></i>
+            </p>
+        </div>
+    </footer>
+
+    {{ if not (eq .Site.Params.Prod "true") }}
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.lazy.min.js"></script>
+    <script type="text/javascript" src="js/jquery.scrollify.js"></script>
+
+    <script type="text/javascript" src="js/scripts.js"></script>
+    <script type="text/javascript" src="js/github.js"></script>
+    {{ else }}
+    <script type="text/javascript" src="dist/js/build.js"></script> {{ end }}
+
+
+</body>
+
+</html>
