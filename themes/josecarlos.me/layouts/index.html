@@ -65,7 +65,7 @@
                     ... Linux.
                 </li>
                 <li>
-                    ... Cryptographic.
+                    ... Cryptography
                 </li>
                 <li>
                     ... Cloud computing & high performance computing.
@@ -86,7 +86,7 @@
             {{ $timeline := (slice "1995") }}
 
             <div class="timeline">
-                {{ range first 20 (where .Pages "Section" "timeline") }} {{ if not (in $timeline (.Date.Format "2006") ) }}
+                {{ range first 20 (where $.Site.RegularPages "Section" "timeline") }} {{ if not (in $timeline (.Date.Format "2006") ) }}
                 <header class="timeline-header">
                     {{ $timeline = $timeline | append (.Date.Format "2006") }}
 
@@ -116,7 +116,7 @@
             {{ $projects := (slice "") }}
 
             <div class="timeline">
-                {{ range first 20 (where (.Pages.ByParam "project") "Section" "contributions") }} {{ if not (in $projects .Params.Project ) }}
+                {{ range first 20 (where ($.Site.RegularPages.ByParam "project") "Section" "contributions") }} {{ if not (in $projects .Params.Project ) }}
                 <header class="timeline-header">
                     {{ $projects = $projects | append (.Params.Project) }}
 
