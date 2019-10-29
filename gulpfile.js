@@ -8,17 +8,21 @@ var replace = require('gulp-replace');
 var webp = require('gulp-webp');
 var hash = require('gulp-hash');
 var references = require('gulp-hash-references');
-
+var purgecss = require('gulp-purgecss');
 var del = require('del');
 const htmlmin = require('gulp-htmlmin');
 
 gulp.task('styles', function() {
     return gulp.src([
+	    'public/css/fontawesome/all.min.css',
             'public/css/bulma/bulma.min.css',
             'public/css/bulma/bulma.timeline.min.css',
             'public/css/style.css'
         ])
         .pipe(concat("css/build.css"))
+	.pipe(purgecss({
+            content: ['public/**/*.html']
+        }))
         .pipe(hash())
         .pipe(cleanCSS())
         .pipe(gulp.dest('public/dist/'))
