@@ -6,8 +6,15 @@
     <meta charset="utf-8">
 
     <title>{{ .Site.Title }}</title>
-    <meta name="description" content="José Carlos García's personal website">
+    <meta name="description" content="{{ .Site.Params.description }}">
     <meta name="author" content="José Carlos (josecarlos.me)"> {{ partial "head_includes.html" . }}
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@{{ .Site.Params.twitteruser }}" />
+    <meta name="twitter:creator" content="@{{ .Site.Params.twitteruser }}" />
+    <meta property="og:url" content="{{ .Site.BaseURL }}" />
+    <meta property="og:title" content="{{ .Site.Title }}" />
+    <meta property="og:description" content="{{ .Site.Params.description }}" />
+    <meta property="og:image" content="img/me.png" />
 </head>
 
 <body>
