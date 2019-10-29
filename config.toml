@@ -4,7 +4,6 @@ title = "Home | José Carlos"
 theme="josecarlos.me"
 
 [params]
-prod="true"
 helloWorldTitle="Hello, world!"
 iamTitle="I'm José Carlos"
 linkedin="https://www.linkedin.com/in/jose-carlos-garcia-ortega-723902a7/"
