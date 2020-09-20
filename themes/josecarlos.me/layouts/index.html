@@ -28,10 +28,18 @@
 
             <h3 class="subtitle is-uppercase has-shadow has-text-white-ter">{{ .Site.Params.HelloWorldTitle }}</h3>
             <h1 class="title has-shadow has-text-white-bis">{{ .Site.Params.IamTitle }}</h1>
-            <h3 class="subtitle has-text-right has-shadow has-text-white-ter">Mathematician <strong style="color: darkgray">+</strong> DevSecOps</h3>
+            <h3 class="subtitle has-text-right has-shadow has-text-white-ter">Mathematician <strong
+                    style="color: darkgray">+</strong> DevSecOps</h3>
             <div class="is-flex social-connect">
-	      
-              <a href="https://www.linkedin.com/in/jose-carlos-garcia-ortega-723902a7/" target="_blank"><svg class="svg-inline--fa fa-linkedin fa-w-14" aria-hidden="true" data-prefix="fab" data-icon="linkedin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg><!-- <i class="fab fa-linkedin"></i> --> </a>
+
+                <a href="https://www.linkedin.com/in/jose-carlos-garcia-ortega-723902a7/" target="_blank"><svg
+                        class="svg-inline--fa fa-linkedin fa-w-14" aria-hidden="true" data-prefix="fab"
+                        data-icon="linkedin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                        data-fa-i2svg="">
+                        <path fill="currentColor"
+                            d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z">
+                        </path>
+                    </svg><!-- <i class="fab fa-linkedin"></i> --> </a>
                 <a href="{{ .Site.Params.Twitter }}" target="_blank">
                     <i class="fab fa-twitter"></i>
 
@@ -86,66 +94,6 @@
         </div>
     </section>
 
-    <section class="hero is-fullheight is-dark is-bold has-background intro" id="timeline">
-        <img class="hero-background is-transparent lazy" data-src="/img/wallpaper3.jpg" />
-        <div class="content">
-            {{ $timeline := (slice "1995") }}
-
-            <div class="timeline">
-                {{ range first 20 (where $.Site.RegularPages "Section" "timeline") }} {{ if not (in $timeline (.Date.Format "2006") ) }}
-                <header class="timeline-header">
-                    {{ $timeline = $timeline | append (.Date.Format "2006") }}
-
-                    <span class="tag is-primary is-medium">{{.Date.Format "2006"}}</span>
-
-                </header>
-
-                {{ end }}
-                <div class="timeline-item is-primary">
-                    <div class="timeline-marker is-primary"></div>
-                    <div class="timeline-content">
-                        <p class="heading">{{.Date.Format "Jan 2006"}} - {{ if .Params.EndDate }} {{dateFormat "Jan 2006" .Params.EndDate}} {{ else }} now {{ end }}</p>
-                        <p class="is-size-4">{{ .Title }} </p>
-                    </div>
-                </div>
-                {{ end }}
-                <header class="timeline-header">
-                    <span class="tag is-medium is-primary">1995</span>
-                </header>
-            </div>
-        </div>
-    </section>
-
-    <section class="hero is-fullheight is-dark is-bold has-background intro" id="contributions">
-        <img class="hero-background is-transparent lazy" data-src="/img/wallpaper4.jpg" />
-        <div class="content">
-            {{ $projects := (slice "") }}
-
-            <div class="timeline">
-                {{ range first 20 (where ($.Site.RegularPages.ByParam "project") "Section" "contributions") }} {{ if not (in $projects .Params.Project ) }}
-                <header class="timeline-header">
-                    {{ $projects = $projects | append (.Params.Project) }}
-
-                    <span class="tag is-info is-medium is-capitalized">{{.Params.Project}}</span>
-
-                </header>
-
-                {{ end }}
-                <div class="timeline-item is-info">
-                    <div class="timeline-marker is-info"></div>
-                    <div class="timeline-content">
-                        <p class="heading">{{.Params.Category }}</p>
-                        <p class="is-size-4 has-text-white	"><a target="_blank" rel="noopener" href="{{ .Params.Link }}">{{ .Title }}</a></p>
-                    </div>
-                </div>
-                {{ end }}
-                <header class="timeline-header">
-                    <span class="tag is-large is-info">&infin;</span>
-                </header>
-            </div>
-        </div>
-    </section>
-
     <section class="hero is-fullheight is-dark is-bold has-background intro" id="portfolio">
         <img class="hero-background is-transparent lazy" data-src="/img/wallpaper5.jpg" />
 
@@ -184,8 +132,8 @@
                     <p class="control has-icons-left">
                         <input id="github-search-project" class="input is-small" type="text" placeholder="search">
                         <span class="icon is-small is-left">
-                      <i class="fas fa-search" aria-hidden="true"></i>
-                    </span>
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </span>
                     </p>
                 </div>
                 <div>
@@ -198,16 +146,17 @@
                             </tr>
                         </thead>
                         <tbody id="github-projects-details">
-			  <tr>
-			    <th class="has-text-white"><a target="_blank" rel="noopener" class="has-text-white" href="https://github.com/JoseCarlosGarcia95/idevicerestore-gui">
-				<i class="fas fa-code-branch" aria-hidden="true"></i>idevicerestore-gui</a>
-			    </th>
-			    <td class="has-text-white">
-			      Restore your iDevice without iTunes
-			    </td>
-			    <td class="has-text-white">
-			      12</td>
-			  </tr>
+                            <tr>
+                                <th class="has-text-white"><a target="_blank" rel="noopener" class="has-text-white"
+                                        href="https://github.com/JoseCarlosGarcia95/idevicerestore-gui">
+                                        <i class="fas fa-code-branch" aria-hidden="true"></i>idevicerestore-gui</a>
+                                </th>
+                                <td class="has-text-white">
+                                    Restore your iDevice without iTunes
+                                </td>
+                                <td class="has-text-white">
+                                    12</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -239,46 +188,6 @@
         </div>
 
     </section>
-    
-    <section class="hero is-fullheight is-dark is-bold has-background intro" id="contact">
-        <img class="hero-background is-transparent lazy" data-src="/img/wallpaper2.jpg" />
-        <div class="content">
-            <h1 class="title">
-                Contact
-            </h1>
-
-            <form action="https://formspree.io/hola@josecarlos.me" method="POST">
-
-                <div class="field">
-                    <label class="label has-text-white">Name</label>
-                    <div class="control">
-                        <input class="input" type="text" name="name" placeholder="Your name">
-                    </div>
-                </div>
-
-
-                <div class="field">
-                    <label class="label has-text-white">Email</label>
-                    <div class="control">
-                        <input class="input" type="email" name="_replyto" placeholder="Your email">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label has-text-white">Message</label>
-                    <div class="control">
-                        <textarea class="textarea" placeholder="Textarea"></textarea>
-                    </div>
-                </div>
-
-                <div class="field is-grouped">
-                    <div class="control">
-                        <input type="submit" class="button" value="Send">
-                    </div>
-                </div>
-
-            </form>
-    </section>
 
     <!--
     <section class="hero is-light  is-dark is-bold has-background">
@@ -298,11 +207,13 @@
     <footer class="footer has-background-grey-dark">
         <div class="content has-text-centered has-text-white">
             <p>
-                <strong class="has-text-white">josecarlos.me</strong> by <a href="https://josecarlos.me">José Carlos</a>.
+                <strong class="has-text-white">josecarlos.me</strong> by <a href="https://josecarlos.me">José
+                    Carlos</a>.
             </p>
             <p>
                 The source code is licensed under
-                <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3</a>. The website content is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+                <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3</a>. The website content is licensed <a
+                    href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
             </p>
 
             <p>
@@ -310,7 +221,9 @@
             </p>
             <p>
                 Made with <strong class="has-text-white">Bulma</strong> + <strong class="has-text-white">Hugo</strong> +
-                <i class="fab fa-linux fa-lg"></i> + <i class="fa fa-code fa-lg"></i> + <i class="fab fa-html5 fa-lg"></i> + <i class="fa fa-heart fa-lg"></i> + <i class="fa fa-coffee fa-lg"></i>
+                <i class="fab fa-linux fa-lg"></i> + <i class="fa fa-code fa-lg"></i> + <i
+                    class="fab fa-html5 fa-lg"></i> + <i class="fa fa-heart fa-lg"></i> + <i
+                    class="fa fa-coffee fa-lg"></i>
             </p>
         </div>
     </footer>

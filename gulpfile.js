@@ -12,15 +12,14 @@ var purgecss = require('gulp-purgecss');
 var del = require('del');
 const htmlmin = require('gulp-htmlmin');
 
-gulp.task('styles', function() {
+gulp.task('styles', function () {
     return gulp.src([
-	    'public/css/fontawesome/all.min.css',
             'public/css/bulma/bulma.min.css',
             'public/css/bulma/bulma.timeline.min.css',
             'public/css/style.css'
         ])
         .pipe(concat("css/build.css"))
-	.pipe(purgecss({
+        .pipe(purgecss({
             content: ['public/**/*.html']
         }))
         .pipe(hash())
@@ -31,7 +30,7 @@ gulp.task('styles', function() {
 
 });
 
-gulp.task('scripts', function() {
+gulp.task('scripts', function () {
     return gulp.src([
             'public/js/jquery-3.4.1.min.js',
             'public/js/jquery.lazy.min.js',
@@ -51,27 +50,38 @@ gulp.task('minify-html', () => {
     return gulp.src('public/**/*.html')
         .pipe(replace('jpg', 'webp'))
         .pipe(references('asset-manifest.json'))
-        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(htmlmin({
+            collapseWhitespace: true
+        }))
         .pipe(gulp.dest('public'));
 });
 
-gulp.task('webp', function() {
+gulp.task('webp', function () {
     return gulp.src('public/img/*')
         .pipe(webp())
         .pipe(gulp.dest('public/img/'))
 });
 
 
-gulp.task('images', function() {
+gulp.task('images', function () {
     return gulp.src('public/img/*')
         .pipe(imagemin([
-            imagemin.gifsicle({ interlaced: true }),
-            imagemin.jpegtran({ progressive: true }),
-            imagemin.optipng({ optimizationLevel: 9 }),
+            imagemin.gifsicle({
+                interlaced: true
+            }),
+            imagemin.jpegtran({
+                progressive: true
+            }),
+            imagemin.optipng({
+                optimizationLevel: 9
+            }),
             imagemin.svgo({
-                plugins: [
-                    { removeViewBox: true },
-                    { cleanupIDs: false }
+                plugins: [{
+                        removeViewBox: true
+                    },
+                    {
+                        cleanupIDs: false
+                    }
                 ]
             })
         ]))
